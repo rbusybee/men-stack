@@ -62,3 +62,13 @@ getCourses();
 // .find({ price: { $gte: 10, $lte: 20 }})
 // .find({ price: { $in: [10,15,20] }})
 
+
+
+// Logical Query Operators
+
+// or
+// and
+
+// .find()
+// .or([{ author: 'romio' }, {isPublished: true}])
+// .and([])
