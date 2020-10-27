@@ -48,5 +48,17 @@ async function getCourses(){
 
 getCourses();
 
+// Comparison Operators
 
+// eq (equal)
+// ne (not equal)
+// gt (greater than)
+// gte (greater than or equal to)
+// lt (less than)
+// lte (less than or equal to)
+// in
+// nin (not in)
+
+// .find({ price: { $gte: 10, $lte: 20 }})
+// .find({ price: { $in: [10,15,20] }})
 
