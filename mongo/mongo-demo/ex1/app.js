@@ -47,5 +47,53 @@ async function ex3() {
         ])
 }
 
-ex3().then((res)=> console.log(res)) 
+// ex3().then((res)=> console.log(res));
 
+
+// Updating Documnet 
+
+async function updateCourse1(id) {
+    // Approach1: Query first
+    // findById()
+    // Modify its properties
+    // save()
+
+    const course = await Course.findById(id);
+
+    if (!course) return;
+
+    course.set({
+        isPublished: true,
+        author: 'Another Author'
+    });
+
+    const result = await course.save();
+    console.log(result);
+}
+
+updateCourse1('5a68fdc3615eda645bc6bdec');
+
+async function updateCourse2(id) {
+    // Approach: Update first
+    // Update Directly
+    // Optionally: get the updated document
+
+    // const result = await Course.update({_id: id},{
+    //     $set: {
+    //         author: 'Romio',
+    //         isPublished: false 
+    //     }
+    // });
+    // console.log(result);
+
+    // Get the recent update
+    const result = await Course.findByIdAndUpdate(id,{
+        $set: {
+            author: 'Romio',
+            isPublished: false 
+        }
+    }, {new: true });
+    console.log(result);
+}
+
+updateCourse2('5a68fdc3615eda645bc6bdec');
