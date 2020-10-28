@@ -71,7 +71,7 @@ async function updateCourse1(id) {
     console.log(result);
 }
 
-updateCourse1('5a68fdc3615eda645bc6bdec');
+// updateCourse1('5a68fdc3615eda645bc6bdec');
 
 async function updateCourse2(id) {
     // Approach: Update first
@@ -96,4 +96,18 @@ async function updateCourse2(id) {
     console.log(result);
 }
 
-updateCourse2('5a68fdc3615eda645bc6bdec');
+// updateCourse2('5a68fdc3615eda645bc6bdec');
+
+
+async function removeCourse(id) { 
+    const del1 = await Course.deleteOne({_id: id});
+    console.log(del1);
+
+    // const del2 = await Course.deleteMany({_id: id});
+    // console.log(del2);
+
+    // const del3 = await Course.findByIdAndRemove(id);
+    // console.log(del3);
+}
+
+removeCourse('5a68fdc3615eda645bc6bdec');
