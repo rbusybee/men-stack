@@ -38,7 +38,7 @@ async function createCourse() {
 
 async function getCourses(){
     const queryResult = await Course
-        .find({ author: 'Romio', isPublished: true })
+        // .find({ author: 'Romio', isPublished: true })
         .limit(10)
         .sort({ name: 1 })
         .select({ name: 1, tags: 1 });
@@ -72,3 +72,15 @@ getCourses();
 // .find()
 // .or([{ author: 'romio' }, {isPublished: true}])
 // .and([])
+
+
+// Added Regular Expression
+
+// Start with Romio (^ => starts with)
+// .find({author: /^Romio/i })
+
+// Ends with Sarkar ($ => ends with and i => case incensetive)
+// .find({ author: /Sarkar$/i })
+
+// Contains word romio (* => any string)
+// .find({ author: /.*Romio.*/i })
