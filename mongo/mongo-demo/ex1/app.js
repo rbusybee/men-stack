@@ -22,4 +22,30 @@ async function getCourses() {
         .select({ name: 1, author: 1, price: 1 });
 }
 
-getCourses().then((res)=> console.log(res))
+// getCourses().then((res)=> console.log(res))
+
+// Exercise 2
+async function ex2() {
+    return await Course
+        .find({ isPublished: true, tags: { $in: ['frontend','backend']}})
+        .or([{tags: 'frontend', tags: 'backend' }])
+        .sort({ price: -1 })
+        .select('name author price')
+}
+
+// ex2().then((res)=> console.log(res))
+
+
+// Exercise 3
+
+async function ex3() {
+    return await Course
+        .find({ isPublished: true})
+        .or([
+            { price: { $gte: 15 } },
+            { name: /.*by.*/ }
+        ])
+}
+
+ex3().then((res)=> console.log(res)) 
+
