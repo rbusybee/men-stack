@@ -86,21 +86,21 @@ const Course = mongoose.model('Courses', courseSchema, 'courses');
 
 // Pagination
 
-// async function pagination(){
-//     const pageNumber = 2;
-//     const pageSize = 10;
-//     // /api/courses?pageNumber=2&pageSize=10
+async function pagination(){
+    const pageNumber = 2;
+    const pageSize = 10;
+    // /api/courses?pageNumber=2&pageSize=10
 
-//     const queryResult = await Course
-//         .find({ isPublished: true })
-//         .skip((pageNumber-1)*pageSize)
-//         .limit(pageSize)
-//         .sort({ name: 1 })
-//         .select({ name: 1, tags: 1 });
-//     console.log(queryResult[0]);
-// }
+    const queryResult = await Course
+        .find({ isPublished: true })
+        .skip((pageNumber-1)*pageSize)
+        .limit(pageSize)
+        .sort({ name: 1 })
+        .select({ name: 1, tags: 1 });
+    console.log(queryResult[0]);
+}
 
-// pagination();
+pagination();
 
 
 
