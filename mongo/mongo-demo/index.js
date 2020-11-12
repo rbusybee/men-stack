@@ -36,14 +36,14 @@ const Course = mongoose.model('Courses', courseSchema, 'courses');
 
 // Querying document from Collection
 
-// async function getCourses(){
-//     const queryResult = await Course
-//         .find({ isPublished: true })
-//         .limit(10)
-//         .sort({ name: 1 })
-//         .select({ name: 1, tags: 1 });
-//     console.log(queryResult[0]);
-// }
+async function getCourses(){
+    const queryResult = await Course
+        .find({ isPublished: true })
+        .limit(10)
+        .sort({ name: 1 })
+        .select({ name: 1, tags: 1 });
+    console.log(queryResult[0]);
+}
 
 // getCourses();
 
