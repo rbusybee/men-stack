@@ -19,18 +19,18 @@ const courseSchema = new mongoose.Schema({
 // Compile Schema to a Model
 const Course = mongoose.model('Courses', courseSchema, 'courses');
 
-// async function createCourse() {
-//     const course = new Course({
-//         name: 'Angular Course',
-//         author: 'romio',
-//         tags: ['angular', 'frontend'],
-//         isPublished: true
-//     });
+async function createCourse() {
+    const course = new Course({
+        name: 'Angular Course',
+        author: 'romio',
+        tags: ['angular', 'frontend'],
+        isPublished: true
+    });
     
-//     // Save data to Database
-//     const result = await course.save();
-//     console.log(result);
-// }
+    // Save data to Database
+    const result = await course.save();
+    console.log(result);
+}
 
 // createCourse()
 
