@@ -23,6 +23,7 @@ const courseSchema = new mongoose.Schema({
     author: String,
     tags: {
         type: Array,
+        // Custom Validators
         validate: {
             validator: function(v) {
                 return v && v.length > 0;
@@ -34,6 +35,7 @@ const courseSchema = new mongoose.Schema({
     isPublished: Boolean,
     price: {
         type: Number,
+        // Dependent in-built validator
         required: function() { return this.isPublished; },
         min: 10,
         max: 200
