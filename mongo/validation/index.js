@@ -39,6 +39,21 @@ const courseSchema = new mongoose.Schema({
         required: function() { return this.isPublished; },
         min: 10,
         max: 200
+    },
+    sponsor: {
+        type: Array,
+        validate: {
+            //Added Async Validators
+            isAsync: true,
+            validator: function(v, callback) {
+                setTimeout(()=>{
+                    // Do some async work
+                    const res = v && v.length > 0;
+                    callback(res)
+                }, 4000);
+            },
+            message: 'Course has atleast one sponsor'
+        }
     }
 });
 
@@ -53,7 +68,8 @@ async function createCourse() {
         author: 'Romio',
         tags: ['angular', 'frontend'],
         isPublished: true,
-        price: 50
+        price: 50,
+        sponsor: ['McGrawHill']
     });
     
     try{
