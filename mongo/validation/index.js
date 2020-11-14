@@ -18,7 +18,10 @@ const courseSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ['web', 'mobile', 'iOS']
+        enum: ['web', 'mobile', 'network'],
+        lowercase: true,
+        // uppercase: true,
+        trim: true
     },
     author: String,
     tags: {
@@ -38,7 +41,11 @@ const courseSchema = new mongoose.Schema({
         // Dependent in-built validator
         required: function() { return this.isPublished; },
         min: 10,
-        max: 200
+        max: 200,
+        // It works when we reading from DB
+        get: v => Math.round(v),
+        // It works when we are writing on DB
+        set: v => Math.round(v)
     },
     sponsor: {
         type: Array,
@@ -64,11 +71,11 @@ const Course = mongoose.model('Courses', courseSchema, 'courses');
 async function createCourse() {
     const course = new Course({
         name: 'Angular Course',
-        category: '-',
+        category: 'network',
         author: 'Romio',
         tags: ['angular', 'frontend'],
         isPublished: true,
-        price: 5,
+        price: 15.8,
         sponsor: ['McGrawHill']
     });
     
@@ -96,5 +103,14 @@ async function createCourse() {
     }
 }
 
+async function getCourse() {
+    const courses = await Course
+        .find({_id: '5fafffde62481f3252ae397d'})
+        .select({price: 1})
+
+    console.log(courses[0].price);
+}
+
 // Calling
-createCourse();
+// createCourse();
+getCourse();
