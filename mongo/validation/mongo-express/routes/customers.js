@@ -47,7 +47,7 @@ router.get('/:id', async (req,res) => {
     }    
 });
 
-router.post('/', (req,res) => {
+router.post('/', async (req,res) => {
     const { error } = validateCustomer(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -60,8 +60,24 @@ router.post('/', (req,res) => {
     res.send(customer);
 });
 
-router.put('/:id', (req,res) => {
+router.put('/:id', async (req,res) => {
+    const { error } = validateCustomer(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
+    try{
+        const customer = await Customer.findByIdAndUpdate(req.params.id,{
+            isGold:req.body.isGold,
+            name:req.body.name,
+            phone:req.body.phone
+        },{
+            new: true
+        });
+    
+        res.send(customer);
+    }
+    catch(ex) {
+        res.status(404).send('Customer with ID was not found in Database');
+    }
 });
 
 router.delete('/:id', (req,res) => {
