@@ -80,8 +80,13 @@ router.put('/:id', async (req,res) => {
     }
 });
 
-router.delete('/:id', (req,res) => {
-
+router.delete('/:id', async (req,res) => {
+    try {
+        const customers = await Customer.findByIdAndRemove(req.params.id);
+        res.send(customers);
+    } catch(ex) {
+        res.status(404).send('Customer with ID was not found in Database');
+    }  
 });
 
 module.exports = router;
