@@ -2,7 +2,9 @@ const express = require('express');
 const { boolean } = require('joi');
 const router = express.Router();
 const mongoose = require('mongoose');
+const Joi = require('joi');
 
+// Model & Schema for Mongoose
 const Customer = mongoose.model('Customers', new mongoose.Schema({
     isGold: {
         type: Boolean,
@@ -22,6 +24,16 @@ const Customer = mongoose.model('Customers', new mongoose.Schema({
     }
 }));
 
+// Validation Function to validate request body
+function validateCustomer(customer) {
+    const schema = {
+        isGold: Joi.boolean().required(),
+        name: Joi.string().min(3).max(255).required(),
+        phone: Joi.string().required()
+    };
+    return Joi.validate(customer, schema);
+}
+
 router.get('/', async (req,res) => {
     res.send(await Customer.find().sort('name'))
 });
@@ -36,7 +48,16 @@ router.get('/:id', async (req,res) => {
 });
 
 router.post('/', (req,res) => {
+    const { error } = validateCustomer(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
 
+    const customer = new Customer({
+        isGold:req.body.isGold,
+        name:req.body.name,
+        phone:req.body.phone
+    });
+    customer = await customer.save();
+    res.send(customer);
 });
 
 router.put('/:id', (req,res) => {
