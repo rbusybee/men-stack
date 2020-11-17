@@ -26,8 +26,13 @@ router.get('/', async (req,res) => {
     res.send(await Customer.find().sort('name'))
 });
 
-router.get('/:id',(req,res) => {
-
+router.get('/:id', async (req,res) => {
+    try {
+        const customers = await Customer.findById(req.params.id);
+        res.send(customers);
+    } catch(ex) {
+        res.status(404).send('Customer with ID was not found in Database');
+    }    
 });
 
 router.post('/', (req,res) => {
