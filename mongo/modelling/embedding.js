@@ -41,9 +41,15 @@ async function updateAuthor(courseId) {
 
     // Update directly
     const course = await Course.update({_id: courseId},{
+        // Update
         $set: {
             'author.name': 'Romio'
         }
+
+        // Remove
+        // $unset: {
+        //     'author': ''
+        // }
     });
 }
 
