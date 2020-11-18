@@ -33,9 +33,18 @@ async function listCourses() {
 }
 
 async function updateAuthor(courseId) {
-    const course = await Course.findById(courseId);
-    course.author.name = 'Mosh Hamedani';
-    course.save()
+
+    // Update byFindId
+    // const course = await Course.findById(courseId);
+    // course.author.name = 'Mosh Hamedani';
+    // course.save()
+
+    // Update directly
+    const course = await Course.update({_id: courseId},{
+        $set: {
+            'author.name': 'Romio'
+        }
+    });
 }
 
 updateAuthor('5fb4d7ab1e37532bfdfd7825');
