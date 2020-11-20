@@ -38,11 +38,10 @@ function validateMovie(movie) {
         title: Joi.string().required().min(5).max(255),
         numberInStock: Joi.number().required().min(0).max(255),
         dailyRentalRate: Joi.number().required().min(0).max(255),
-        genreId: Joi.objectId().required()
+        genreId: Joi.string().required()
     };
     return Joi.validate(movie, schema);
 }
 
-exports.movieSchema = movieSchema;
 exports.Movie = Movie;
 exports.validate = validateMovie;
