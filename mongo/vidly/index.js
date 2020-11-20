@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid');
 const genres = require('./routes/genres');
+const customers = require('./routes/customers');
 
 // Database Connection
 mongoose.connect('mongodb://localhost/vidly2')
@@ -12,6 +13,7 @@ mongoose.connect('mongodb://localhost/vidly2')
 
 app.use(express.json());
 app.use('/api/genres', genres);
+app.use('/api/customers', customers);
 
 const port = process.env.PORT || 8080;
 app.listen(port,() => console.log(`Listening on port ${port}...`));
