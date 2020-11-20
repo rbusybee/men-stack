@@ -9,7 +9,7 @@ mongoose.connect('mongodb://localhost/vidly2')
     .catch((err) => console.log('Unable to connect MongoDB...',err));
 
 app.use(express.json());
-app.use('api/genres', genres);
+app.use('/api/genres', genres);
 
 const port = process.env.PORT || 8080;
 app.listen(port,() => console.log(`Listening on port ${port}...`));
