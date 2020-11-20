@@ -14,7 +14,7 @@ router.get('/',async (req,res)=>{
 
 router.post('/', async (req,res) => {
     const { error } = validate(req.body);
-    if (error ) return res.status(400).send('Bad request',error.details[0].message);
+    if (error) return res.status(400).send('Bad request',error.details[0].message);
 
     const customer = await Customer.findById(req.body.customerId);
     if(!customer) return res.status(400).send('Invalid Customer');
@@ -25,9 +25,6 @@ router.post('/', async (req,res) => {
     if (movie.numberInStock === 0) return res.status(400).send('Movie not in Stock');
 
     const rental = new Rental({
-        title: req.body.title,
-        numberInStock: req.body.numberInStock,
-        dailyRentalRate: req.body.dailyRentalRate,
         movie: {
             _id: movie._id,
             title: movie.title,
@@ -42,7 +39,7 @@ router.post('/', async (req,res) => {
 
     // Transactions
     try {
-        new Fawn().Task()
+        new Fawn.Task()
             .save('rentals', rental)
             .update('movies',{ _id: movie._id},{
                 $inc: { numberInStock: -1 }
@@ -55,21 +52,21 @@ router.post('/', async (req,res) => {
     }
 });
 
-router.put('/:id', async (req,res) => {
-    const { error } = validate(req.body);
-    if (error ) return res.status(400).send('Bad request',error.details[0].message);
-    const rental = await Rental.findByIdAndUpdate(req.params.id, { name: req.body.name },{
-        new: true
-    });
-    if (!rental) return res.status(400).send('Given Movie id not found');
-    res.send(rental);
-});
+// router.put('/:id', async (req,res) => {
+//     const { error } = validate(req.body);
+//     if (error ) return res.status(400).send('Bad request',error.details[0].message);
+//     const rental = await Rental.findByIdAndUpdate(req.params.id, { name: req.body.name },{
+//         new: true
+//     });
+//     if (!rental) return res.status(400).send('Given Movie id not found');
+//     res.send(rental);
+// });
 
-router.delete('/:id', async (req,res) => {
-    const rental = await Rental.findByIdAndRemove(req.params.id);
-    if (!rental) return res.status(400).send('Given Rental id not found');
-    res.send(rental);
-});
+// router.delete('/:id', async (req,res) => {
+//     const rental = await Rental.findByIdAndRemove(req.params.id);
+//     if (!rental) return res.status(400).send('Given Rental id not found');
+//     res.send(rental);
+// });
 
 router.get('/:id', async (req,res) => {
     const rental = await Rental.findById(req.params.id);
