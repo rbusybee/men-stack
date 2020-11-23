@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const { Movie, validate } = require('../models/movie');
-const { Genre } = require('../models/genre')
+const { Genre } = require('../models/genre');
+const asyncMiddileware = require('../middleware/async');
 
-router.get('/',async (req,res)=>{
+router.get('/', asyncMiddileware(async (req,res)=>{
     res.send(await Movie.find().sort('name'));
-});
+}));
 
 router.post('/', async (req,res) => {
     const { error } = validate(req.body);
