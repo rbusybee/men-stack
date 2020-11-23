@@ -7,6 +7,7 @@ const { admin } = require('../middleware/role');
 
 router.get('/',async (req,res,next)=>{
     try {
+        // throw new Error('could not get');
         res.send(await Genre.find().sort('name'));
     }
     catch(ex){

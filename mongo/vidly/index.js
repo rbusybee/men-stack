@@ -12,6 +12,9 @@ const users = require('./routes/users');
 const auth = require('./routes/auth');
 const config = require('config');
 const error = require('./middleware/error');
+const winston = require('winston');
+
+winston.add(winston.transports.File, { filename: 'logfile.log' });
 
 if (!config.get('jwtPrivateKey')) {
     console.log('FATAL ERROR: jwtPrivateKey is not defined');
