@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
 
-// Models: User
-const User = mongoose.model('User', new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -22,7 +21,10 @@ const User = mongoose.model('User', new mongoose.Schema({
         minlength: 5,
         maxlength: 1024
     },
-}), 'users');
+});
+
+// Models: User
+const User = mongoose.model('User', userSchema, 'users');
 
 // Request Validation
 function validateUser(user) {
