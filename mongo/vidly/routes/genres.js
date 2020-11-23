@@ -10,6 +10,7 @@ router.get('/',async (req,res,next)=>{
         res.send(await Genre.find().sort('name'));
     }
     catch(ex){
+        // res.status(500).send('Something failed...');
         next(ex);
     }
 });
