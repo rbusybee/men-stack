@@ -1,5 +1,5 @@
 require('express-async-errors');
-const mongoose = require('mongoose');
+
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 const config = require('config');
@@ -11,7 +11,7 @@ const app = express();
 
 require('./init/routes')(app);
 
-require('./init/db')(mongoose);
+require('./init/db')();
 
 
 // Error Handeller: Uncaught Exceptions

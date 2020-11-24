@@ -1,6 +1,8 @@
-module.exports = function(mongoose) {
+const winston = require('winston');
+const mongoose = require('mongoose');
+
+module.exports = function() {
     // Database Connection
     mongoose.connect('mongodb://localhost/vidly2')
-    .then(()=> console.log('Connected to MongoDB...'))
-    .catch((err) => console.log('Unable to connect MongoDB...',err));
+        .then(()=> winston.info('Connected to MongoDB...'));
 }
