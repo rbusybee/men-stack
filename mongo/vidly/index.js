@@ -20,6 +20,11 @@ process.on('uncaughtException', (ex) => {
     winston.error(ex.message, ex);
 });
 
+// Error Handeller: Unhandled Rejection
+process.on('unhandledRejection', (ex) => {
+    winston.error(ex.message, ex);
+});
+
 // Error Throw
 // throw new Error('Something failed during startup');
 
