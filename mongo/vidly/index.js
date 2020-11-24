@@ -15,12 +15,22 @@ const error = require('./middleware/error');
 const winston = require('winston');
 require('winston-mongodb');
 
+// Error Handeller: Uncaught Exceptions
+process.on('uncaughtException', (ex) => {
+    winston.error(ex.message, ex);
+});
+
+// Error Throw
+// throw new Error('Something failed during startup');
+
+// Adding logger
 winston.add(winston.transports.File, { filename: 'logfile.log' });
 winston.add(winston.transports.MongoDB, {
     db: 'mongodb://localhost/vidly2',
     level: 'info'
 });
 
+// Handlling env variables
 if (!config.get('jwtPrivateKey')) {
     console.log('FATAL ERROR: jwtPrivateKey is not defined');
     process.exit(1);
