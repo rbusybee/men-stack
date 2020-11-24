@@ -11,6 +11,7 @@ const app = express();
 
 require('./init/routes')(app);
 
+require('./init/db')(mongoose);
 
 
 // Error Handeller: Uncaught Exceptions
@@ -39,10 +40,6 @@ if (!config.get('jwtPrivateKey')) {
     process.exit(1);
 }
 
-// Database Connection
-mongoose.connect('mongodb://localhost/vidly2')
-    .then(()=> console.log('Connected to MongoDB...'))
-    .catch((err) => console.log('Unable to connect MongoDB...',err));
 
 
 const port = process.env.PORT || 8080;
