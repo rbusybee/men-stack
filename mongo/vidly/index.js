@@ -16,13 +16,13 @@ const winston = require('winston');
 require('winston-mongodb');
 
 // Error Handeller: Uncaught Exceptions
-process.on('uncaughtException', (ex) => {
-    winston.error(ex.message, ex);
-});
+winston.handleExceptions(
+    new winston.transports.File({ filename: 'uncaughtExceptions.log' })
+);
 
 // Error Handeller: Unhandled Rejection
 process.on('unhandledRejection', (ex) => {
-    winston.error(ex.message, ex);
+    throw ex;
 });
 
 // Error Throw
