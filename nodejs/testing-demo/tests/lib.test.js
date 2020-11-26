@@ -72,6 +72,8 @@ describe('registerUser', ()=>{
     });
 
     it('should return user object', ()=>{
-        
+        const res = lib.registerUser('romio');
+        expect(res).toMatchObject({ username: 'romio'});
+        expect(res.id).toBeGreaterThan(0);
     });
 });
