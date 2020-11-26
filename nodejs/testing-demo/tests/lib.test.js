@@ -53,10 +53,25 @@ describe('getCurrencies', ()=> {
     });
 });
 
+// Testing Objects
 describe('getProduct', ()=> {
     it('should return an object', ()=>{
         const res = lib.getProduct(1);
         expect(res).toEqual({id: 1, price: 10});
         expect(res).toMatchObject({id: 1, price: 10});
+    });
+});
+
+// Testing Exceptions
+describe('registerUser', ()=>{
+    it('should throw error if username is falsy', ()=>{
+        const args = [null,undefined,false,'',0];
+        args.forEach(a => {
+            expect(()=> { lib.registerUser(a) }).toThrow();
+        });
+    });
+
+    it('should return user object', ()=>{
+        
     });
 });
