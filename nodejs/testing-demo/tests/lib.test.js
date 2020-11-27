@@ -1,4 +1,6 @@
 const lib = require('../lib');
+const mail = require('../mail');
+const db = require('../db');
 
 // Grouping Tests
 describe('absolute function', ()=> {
@@ -75,5 +77,23 @@ describe('registerUser', ()=>{
         const res = lib.registerUser('romio');
         expect(res).toMatchObject({ username: 'romio'});
         expect(res.id).toBeGreaterThan(0);
+    });
+});
+
+// Object Interaction Testing(using Mock Function)
+describe('notifyCustomer', ()=>{
+    it('should send an email to the customer',()=>{
+        db.getCustomerSync = function(customerId) {
+            return {email: 'a' };
+        }
+
+        let mailSent = false;
+        mail.send = function(email,message) {
+            mailSent = true;
+        }
+
+        lib.notifyCustomer({customerId: 1});
+
+        expect(mailSent).toBe(true);
     });
 });
