@@ -83,9 +83,10 @@ describe('registerUser', ()=>{
 // Object Interaction Testing(using Mock Function)
 describe('notifyCustomer', ()=>{
     it('should send an email to the customer',()=>{
-        db.getCustomerSync = function(customerId) {
-            return {email: 'a' };
-        }
+        // db.getCustomerSync = function(customerId) {
+        //     return {email: 'a' };
+        // }
+        db.getCustomerSync = jest.fn().mockReturnValue({email: 'a' });
 
         let mailSent = false;
         mail.send = function(email,message) {
