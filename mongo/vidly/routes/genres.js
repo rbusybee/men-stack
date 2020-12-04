@@ -48,4 +48,5 @@ router.get('/:id', async (req,res) => {
     res.send(genre);
 });
 
+// Exporting modules
 module.exports = router;
