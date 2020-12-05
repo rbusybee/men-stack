@@ -5,6 +5,7 @@ const { Genre, validate } = require('../models/genre');
 const auth = require('../middleware/auth');
 const { admin } = require('../middleware/role');
 
+// API
 router.get('/',async (req,res,next)=>{
     try {
         // throw new Error('could not get');
